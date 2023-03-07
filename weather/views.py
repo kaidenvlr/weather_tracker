@@ -7,6 +7,9 @@ import requests
 def index(request):
     url = 'https://api.weatherapi.com/v1/current.json?key=acf397923ff642be91c94723210710&q={}&aqi=yes'
     queryset = City.objects.all()
+    if not queryset:
+        City.objects.create(name='Astana')
+    queryset = City.objects.all()
     set_cities = set(sorted([city['name'] for city in list(queryset.values())]))
     city = sorted([city['name'] for city in list(queryset.values())])[0]
     if request.method == 'POST':
